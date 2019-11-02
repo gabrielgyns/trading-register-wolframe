@@ -1,5 +1,5 @@
 # Wolframe - Trading Register
-A simple trading register to practice skills with advanced javascript and to save the trades made.
+A simple trading register to practice skills with advanced javascript.
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/gabrielgyns/trading-register-wolframe)
 ![GitHub last commit](https://img.shields.io/github/last-commit/gabrielgyns/trading-register-wolframe)
