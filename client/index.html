@@ -37,7 +37,10 @@
         <button class="btn btn-primary text-center" type="button">
             Importar Negociações
         </button>
-        <button class="btn btn-primary text-center" type="button">
+        <button 
+            class="btn btn-primary text-center" 
+            type="button"
+            onclick="negociacaoController.apaga()">
             Apagar
         </button>
     </div> 
@@ -58,6 +61,6 @@
     <script>
         let negociacaoController = new NegociacaoController();
     </script>
-    
+
 </body>
 </html>

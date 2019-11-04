@@ -16,8 +16,10 @@ This is a simple register of trades to practice my skills with **Advanced JavaSc
 - [x] Template Strings
 - [x] Arrows functions
 - [x] Maps and Reduce concepts
+- [x] Proxy Design Pattern
 - [ ] Promises
-- [ ] Factory standard
+- [ ] Factory Design Pattern
+- [ ] Observer Design Pattern
 - [ ] Fetch API
 - [ ] IndexedDB
 - [ ] And more
