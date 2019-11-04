@@ -10,44 +10,47 @@ class NegociacaoController {
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
         
-        this._listaNegociacoes = new Proxy(new ListaNegociacoes(), {
-            get(target, prop, receiver){
-
-                if(['adiciona', 'esvazia'].includes(prop) && typeof(target[prop]) == typeof(Function)){
-                    
-                    console.log(`interceptando: ${target[prop]}`);
-                    Reflect.set(target[prop], target, arguments);
-                    self._negociacoesView.update(target);
-                }
-
-            }
-        });
+        this._listaNegociacoes = new Bind(
+            new ListaNegociacoes(),
+            new NegociacaoView($('#negociacoesView')),
+            'adiciona', 'esvazia');
         
-        this._negociacoesView = new NegociacaoView($('#negociacoesView'));
-        this._negociacoesView.update(this._listaNegociacoes);
-        
-        this._mensagem = new Mensagem();
-        this._mensagemView = new MensagemView($('#mensagemView'));
-        this._mensagemView.update(this._mensagem);
+        this._mensagem = new Bind(
+            new Mensagem(),
+            new MensagemView($('#mensagemView')), 
+            'texto');
+
     }
 
     adiciona(event) {
         event.preventDefault();
         
         this._listaNegociacoes.adiciona(this._criaNegociacao());
-        
         this._mensagem.texto = 'Negociação adicionada com sucesso!';
-        this._mensagemView.update(this._mensagem);
 
         this._form.reset();
         this._inputData.focus();
     }
 
+    importaNegociacoes() {
+
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', 'negociacoes/semana');
+        xhr.onreadystatechange = () => {
+            if(xhr.readyState == 4) {
+                if(xhr.status == 200) {
+                    console.log('Obtendo as negociações do servidor.')
+                } else {
+                    console.log('Não foi possível obter as negociações do servidor.')
+                }
+            }
+        }
+        xhr.send();
+    }
+
     apaga() {
         this._listaNegociacoes.esvazia();
-
         this._mensagem.texto = 'Negociações apagadas com sucesso!';
-        this._mensagemView.update(this._mensagem);
     }
 
     _criaNegociacao() {

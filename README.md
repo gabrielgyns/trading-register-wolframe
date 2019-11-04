@@ -17,8 +17,8 @@ This is a simple register of trades to practice my skills with **Advanced JavaSc
 - [x] Arrows functions
 - [x] Maps and Reduce concepts
 - [x] Proxy Design Pattern
+- [x] Factory Design Pattern
 - [ ] Promises
-- [ ] Factory Design Pattern
 - [ ] Observer Design Pattern
 - [ ] Fetch API
 - [ ] IndexedDB
