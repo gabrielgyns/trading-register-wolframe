@@ -13,12 +13,14 @@ class NegociacaoController {
         this._listaNegociacoes = new Bind(
             new ListaNegociacoes(),
             new NegociacaoView($('#negociacoesView')),
-            'adiciona', 'esvazia');
+            'adiciona', 'esvazia', 'ordena', 'inverteOrdem');
         
         this._mensagem = new Bind(
             new Mensagem(),
             new MensagemView($('#mensagemView')), 
             'texto');
+
+        this._ordemAtual = ''  
 
     }
 
@@ -33,19 +35,15 @@ class NegociacaoController {
     }
 
     importaNegociacoes() {
-
-        let xhr = new XMLHttpRequest();
-        xhr.open('GET', 'negociacoes/semana');
-        xhr.onreadystatechange = () => {
-            if(xhr.readyState == 4) {
-                if(xhr.status == 200) {
-                    console.log('Obtendo as negociações do servidor.')
-                } else {
-                    console.log('Não foi possível obter as negociações do servidor.')
-                }
-            }
-        }
-        xhr.send();
+        let service = new NegociacaoService();
+        service
+            .obterNegociacoes()
+            .then(negociacoes => {
+            
+                negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+                this._mensagem.texto = 'Negociações do período importadas com sucesso';
+            
+            }).catch(error => this._mensagem.texto = error);  
     }
 
     apaga() {
@@ -59,6 +57,15 @@ class NegociacaoController {
             this._inputQuantidade.value,
             this._inputValor.value
         );
+    }
+
+    ordena(coluna) {
+        if(this._ordemAtual == coluna) {
+            this._listaNegociacoes.inverteOrdem();
+        } else {
+            this._listaNegociacoes.ordena((a, b) => a[coluna] - b[coluna]);    
+        }
+        this._ordemAtual = coluna;
     }
 
 }
