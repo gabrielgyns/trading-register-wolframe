@@ -16,10 +16,8 @@ Esse é um simples cadastro de negociações para praticar minhas habilidades co
 - [x] Template Strings
 - [x] Arrows functions
 - [x] Maps and Reduce concepts
-- [ ] Promises
-- [ ] Factory standard
-- [ ] Fetch API
-- [ ] IndexedDB
-- [ ] E mais
-
-**Por enquanto** todo o projeto é estático, caso você recarregue a página os dados são perdidos!
+- [x] Promises
+- [x] Factory standard
+- [x] Fetch API
+- [x] IndexedDB
+- [x] E mais
